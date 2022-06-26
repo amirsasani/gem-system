@@ -16,7 +16,7 @@ class CreateGemsTable extends Migration
         Schema::create('gems', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique();
-            $table->integer('gem');
+            $table->integer('gem')->default(0);
             $table->timestamps();
         });
     }
