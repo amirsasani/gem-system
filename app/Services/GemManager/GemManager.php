@@ -2,6 +2,7 @@
 
 namespace App\Services\GemManager;
 
+use App\Models\Gem;
 use App\Models\User;
 
 class GemManager
@@ -21,14 +22,24 @@ class GemManager
 
     public function increment(int $amount = 1)
     {
-        $this->user->gem()->increment('gem', $amount);
-        return $this->user->gem->gem;
+        $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
+        $userGem->gem += $amount;
+        $userGem->save();
+
+        $userGem->transactions()->create(['amount' => $amount]);
+
+        return $userGem->gem;
     }
 
     public function decrement(int $amount = 1)
     {
-        $this->user->gem()->decrement('gem', $amount);
-        return $this->user->gem->gem;
+        $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
+        $userGem->gem -= $amount;
+        $userGem->save();
+
+        $userGem->transactions()->create(['amount' => $amount * -1]);
+
+        return $userGem->gem;
     }
 
     /**
