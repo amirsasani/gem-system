@@ -4,6 +4,7 @@ namespace App\Services\GemManager;
 
 use App\Models\Gem;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class GemManager
 {
@@ -32,13 +33,15 @@ class GemManager
 
     private function changeAmount(int $amount = 1)
     {
-        $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
-        $userGem->gem += $amount;
-        $userGem->save();
+        DB::transaction(function () use($amount) {
+            $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
 
-        $userGem->transactions()->create(['amount' => $amount]);
+            $userGem->update(['gem' => DB::raw(sprintf('gem + %d', $amount))]);
 
-        return $userGem->gem;
+            $userGem->transactions()->create(['amount' => $amount]);
+        }, 3);
+
+        return true;
     }
 
     /**
