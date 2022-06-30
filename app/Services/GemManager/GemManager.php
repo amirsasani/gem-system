@@ -22,22 +22,21 @@ class GemManager
 
     public function increment(int $amount = 1)
     {
+        return $this->changeAmount($amount);
+    }
+
+    public function decrement(int $amount = 1)
+    {
+        return $this->changeAmount($amount * -1);
+    }
+
+    private function changeAmount(int $amount = 1)
+    {
         $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
         $userGem->gem += $amount;
         $userGem->save();
 
         $userGem->transactions()->create(['amount' => $amount]);
-
-        return $userGem->gem;
-    }
-
-    public function decrement(int $amount = 1)
-    {
-        $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
-        $userGem->gem -= $amount;
-        $userGem->save();
-
-        $userGem->transactions()->create(['amount' => $amount * -1]);
 
         return $userGem->gem;
     }
