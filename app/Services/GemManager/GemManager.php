@@ -34,7 +34,7 @@ class GemManager
     private function changeAmount(int $amount = 1)
     {
         DB::transaction(function () use($amount) {
-            $userGem = Gem::firstOrCreate(['user_id' => $this->user->id]);
+            $userGem = Gem::lockForUpdate()->firstOrCreate(['user_id' => $this->user->id]);
 
             $userGem->update(['gem' => DB::raw(sprintf('gem + %d', $amount))]);
 
