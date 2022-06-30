@@ -78,4 +78,18 @@ class GemManagerTest extends TestCase
 
         $this->assertDatabaseCount('gem_transactions', 5);
     }
+
+    public function test_decrement_with_positive_value()
+    {
+        $user = User::latest()->first();
+
+        $gemManager = new GemManager($user);
+
+        $gemManager->increment(5);
+        $gemManager->decrement();
+        $gemManager->decrement(2);
+        $gemManager->decrement(-2);
+
+        $this->assertEquals(0, $user->gem->gem);
+    }
 }
