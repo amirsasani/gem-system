@@ -18,7 +18,7 @@ class GemManagerTest extends TestCase
         User::factory()->create();
     }
 
-    public function test_increment_user_gem_test()
+    public function test_increment_user_gem()
     {
         $user = User::latest()->first();
 
@@ -34,7 +34,7 @@ class GemManagerTest extends TestCase
     }
 
     /**
-     * @depends test_increment_user_gem_test
+     * @depends test_increment_user_gem
      */
     public function test_increment_user_gem_transaction()
     {
@@ -53,7 +53,7 @@ class GemManagerTest extends TestCase
     /**
      * @depends test_increment_user_gem_transaction
      */
-    public function test_decrement_user_gem_test()
+    public function test_decrement_user_gem()
     {
         $user = User::latest()->first();
 
@@ -68,7 +68,7 @@ class GemManagerTest extends TestCase
     }
 
     /**
-     * @depends test_decrement_user_gem_test
+     * @depends test_decrement_user_gem
      */
     public function test_decrement_user_gem_transaction()
     {
