@@ -26,9 +26,11 @@ class GemManager
         return $this->changeAmount($amount);
     }
 
-    public function decrement(int $amount = 1)
+    public function decrement(int $amount = -1)
     {
-        return $this->changeAmount($amount * -1);
+        // decrement amount should be negative
+        $amount = $amount > 0 ? $amount * -1 : $amount;
+        return $this->changeAmount($amount);
     }
 
     private function changeAmount(int $amount = 1)
