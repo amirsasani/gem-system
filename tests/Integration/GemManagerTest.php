@@ -33,9 +33,7 @@ class GemManagerTest extends TestCase
         ]);
     }
 
-    /**
-     * @depends test_increment_user_gem
-     */
+
     public function test_increment_user_gem_transaction()
     {
         $user = User::latest()->first();
@@ -50,9 +48,7 @@ class GemManagerTest extends TestCase
         $this->assertDatabaseCount('gem_transactions', 3);
     }
 
-    /**
-     * @depends test_increment_user_gem_transaction
-     */
+
     public function test_decrement_user_gem()
     {
         $user = User::latest()->first();
@@ -67,9 +63,7 @@ class GemManagerTest extends TestCase
         ]);
     }
 
-    /**
-     * @depends test_decrement_user_gem
-     */
+
     public function test_decrement_user_gem_transaction()
     {
         $user = User::latest()->first();
