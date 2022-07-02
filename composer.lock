@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "437fcf42d28ed225a79b9045e23f94cd",
+    "content-hash": "df2ba0a895cd911e637d970507ca2d07",
     "packages": [
+        {
+            "name": "amirsasani/gem-system-package",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amirsasani/gem-system-package.git",
+                "reference": "3b33bb08e27d51e248aede65eae50435164c4838"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amirsasani/gem-system-package/zipball/3b33bb08e27d51e248aede65eae50435164c4838",
+                "reference": "3b33bb08e27d51e248aede65eae50435164c4838",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AmirSasani\\GemSystem\\GemManagerServiceProvider"
+                    ],
+                    "aliases": {
+                        "GemService": "AmirSasani\\GemSystem\\Facades"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AmirSasani\\GemSystem\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A package to manage users gem in laravel",
+            "support": {
+                "source": "https://github.com/amirsasani/gem-system-package/tree/master",
+                "issues": "https://github.com/amirsasani/gem-system-package/issues"
+            },
+            "time": "2022-07-02T14:45:55+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
@@ -5398,39 +5439,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "amirsasani/gem-system-package",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "packages/amirsasani/gem-system-package",
-                "reference": "739c61cf622094719d6761b6731694e64dc65505"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "AmirSasani\\GemSystem\\GemManagerServiceProvider"
-                    ],
-                    "aliases": {
-                        "GemService": "AmirSasani\\GemSystem\\Facades"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "AmirSasani\\GemSystem\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A package to manage users gem in laravel",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
         {
             "name": "doctrine/instantiator",
             "version": "1.4.1",
