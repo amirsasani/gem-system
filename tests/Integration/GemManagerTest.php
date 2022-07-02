@@ -2,8 +2,8 @@
 
 namespace Tests\Integration;
 
+use AmirSasani\GemSystem\Facades\GemService;
 use App\Models\User;
-use App\Services\GemManager\GemManager;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,14 +18,20 @@ class GemManagerTest extends TestCase
         User::factory()->create();
     }
 
+    public function test_gem_service_facade()
+    {
+        $user = User::latest()->first();
+
+        $gemService = GemService::setUser($user)->increment(10)->decrement(3)->getGem();
+
+        $this->assertEquals(7, $gemService->gem);
+    }
+
     public function test_increment_user_gem()
     {
         $user = User::latest()->first();
 
-        $gemManager = new GemManager($user);
-
-        $gemManager->increment();
-        $gemManager->increment(5);
+        GemService::setUser($user)->increment()->increment(5);
 
         $this->assertDatabaseHas('gems', [
             'user_id' => $user->id,
@@ -38,12 +44,7 @@ class GemManagerTest extends TestCase
     {
         $user = User::latest()->first();
 
-        $gemManager = new GemManager($user);
-
-        $gemManager->increment();
-        $gemManager->increment(5);
-        $gemManager->decrement(3);
-
+        GemService::setUser($user)->increment()->increment(5)->decrement(3);
 
         $this->assertDatabaseCount('gem_transactions', 3);
     }
@@ -53,9 +54,7 @@ class GemManagerTest extends TestCase
     {
         $user = User::latest()->first();
 
-        $gemManager = new GemManager($user);
-
-        $gemManager->decrement();
+        GemService::setUser($user)->decrement();
 
         $this->assertDatabaseHas('gems', [
             'user_id' => $user->id,
@@ -68,13 +67,12 @@ class GemManagerTest extends TestCase
     {
         $user = User::latest()->first();
 
-        $gemManager = new GemManager($user);
-
-        $gemManager->decrement();
-        $gemManager->increment(3);
-        $gemManager->decrement(2);
-        $gemManager->decrement(2);
-        $gemManager->increment(1);
+        GemService::setUser($user)
+            ->decrement()
+            ->increment(3)
+            ->decrement(2)
+            ->decrement(2)
+            ->increment(1);
 
         $this->assertDatabaseCount('gem_transactions', 5);
     }
@@ -83,12 +81,11 @@ class GemManagerTest extends TestCase
     {
         $user = User::latest()->first();
 
-        $gemManager = new GemManager($user);
-
-        $gemManager->increment(5);
-        $gemManager->decrement();
-        $gemManager->decrement(2);
-        $gemManager->decrement(-2);
+        GemService::setUser($user)
+            ->increment(5)
+            ->decrement()
+            ->decrement(2)
+            ->decrement(-2);
 
         $this->assertEquals(0, $user->gem->gem);
     }
