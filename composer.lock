@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amirsasani/gem-system-package.git",
-                "reference": "3b33bb08e27d51e248aede65eae50435164c4838"
+                "reference": "216c6008dde907cf650b96f9236722b96afb60ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amirsasani/gem-system-package/zipball/3b33bb08e27d51e248aede65eae50435164c4838",
-                "reference": "3b33bb08e27d51e248aede65eae50435164c4838",
+                "url": "https://api.github.com/repos/amirsasani/gem-system-package/zipball/216c6008dde907cf650b96f9236722b96afb60ef",
+                "reference": "216c6008dde907cf650b96f9236722b96afb60ef",
                 "shasum": ""
             },
             "default-branch": true,
@@ -45,7 +45,7 @@
                 "source": "https://github.com/amirsasani/gem-system-package/tree/master",
                 "issues": "https://github.com/amirsasani/gem-system-package/issues"
             },
-            "time": "2022-07-02T14:45:55+00:00"
+            "time": "2022-07-02T16:18:44+00:00"
         },
         {
             "name": "asm89/stack-cors",
